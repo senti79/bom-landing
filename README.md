@@ -11,7 +11,40 @@ GitHub Pages로 배포되는 랜딩 콘텐츠 리포지토리입니다. 관리�
 - `.github/workflows/validate.yml`: PR/푸시 시 스키마 검증
 
 Pages URL 예시: `https://<user>.github.io/bom-landing/`
-JSON URL: `https://<user>.github.io/bom-landing/content/landing.json`
+JSON URL(단일 파일): `https://<user>.github.io/bom-landing/content/landing.json`
+
+### 언어별 분리(옵션)
+
+- 매니페스트: `content/manifest.json`
+- 각 언어 파일:
+  - `content/landing.ko.json`
+  - `content/landing.en.json`
+- URL 예시
+  - `https://<user>.github.io/bom-landing/content/landing.ko.json`
+  - `https://<user>.github.io/bom-landing/content/landing.en.json`
+  - 매니페스트: `https://<user>.github.io/bom-landing/content/manifest.json`
+
+프론트 사용 예시
+
+```js
+const base = 'https://<user>.github.io/bom-landing/content';
+const lang = (navigator.language || 'ko').startsWith('en') ? 'en' : 'ko';
+const url = `${base}/landing.${lang}.json?v=${new Date().toISOString().slice(0,10)}`;
+const res = await fetch(url, { cache: 'no-store' });
+const data = await res.json();
+```
+
+또는 매니페스트 사용
+
+```js
+const base = 'https://<user>.github.io/bom-landing/content';
+const manRes = await fetch(`${base}/manifest.json`, { cache: 'no-store' });
+const manifest = await manRes.json();
+const lang = manifest.defaultLang || 'ko';
+const path = manifest.languages[lang];
+const res = await fetch(`${base}/${path}`, { cache: 'no-store' });
+const data = await res.json();
+```
 
 ## 운영 방법
 
@@ -19,7 +52,7 @@ JSON URL: `https://<user>.github.io/bom-landing/content/landing.json`
 2. PR 생성 → CI(스키마 검증) 통과 확인 → 리뷰/머지
 3. 머지 후 1~2분 내 Pages 반영
 
-프론트엔드는 위 JSON URL을 `fetch`하여 콘텐츠를 표시합니다.
+프론트엔드는 위 JSON URL(단일 또는 언어별)을 `fetch`하여 콘텐츠를 표시합니다.
 
 ```js
 const url = 'https://<user>.github.io/bom-landing/content/landing.json?v=' + new Date().toISOString().slice(0,10);
@@ -32,4 +65,3 @@ const data = await res.json();
 
 - 필요 시 캐시 무효화를 위해 쿼리파라미터 버전 또는 파일명 버전을 사용하세요.
 - 비공개 운영이 필요하면 Pages 대신 S3/CloudFront 등 대안을 고려하세요.
-

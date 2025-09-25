@@ -21,22 +21,52 @@
     </header>
 
     <main id="app">
-      <p>로딩 중...</p>
+      <label>
+        언어:
+        <select id="lang">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+      <p id="status">로딩 중...</p>
     </main>
 
     <h3>Raw JSON</h3>
     <pre id="raw"></pre>
 
     <script>
-      async function load() {
-        const url = './content/landing.json?v=' + new Date().toISOString().slice(0,10);
-        const res = await fetch(url, { cache: 'no-store' });
-        if (!res.ok) throw new Error('Failed to load landing.json');
-        const data = await res.json();
+      async function chooseAndLoad(lang) {
+        const today = new Date().toISOString().slice(0,10);
+        const base = './content';
+        const manifestUrl = `${base}/manifest.json?v=${today}`;
+        const status = document.getElementById('status');
+        status.textContent = '로딩 중...';
+        let data;
+        try {
+          const m = await fetch(manifestUrl, { cache: 'no-store' });
+          if (m.ok) {
+            const manifest = await m.json();
+            const chosen = lang || manifest.defaultLang || 'ko';
+            const path = manifest.languages?.[chosen];
+            if (path) {
+              const r = await fetch(`${base}/${path}?v=${today}`, { cache: 'no-store' });
+              if (r.ok) data = await r.json();
+            }
+          }
+        } catch (_) { /* ignore */ }
+        if (!data) {
+          // fallback to single file
+          const url = `${base}/landing.json?v=${today}`;
+          const res = await fetch(url, { cache: 'no-store' });
+          if (!res.ok) throw new Error('Failed to load landing.json');
+          data = await res.json();
+        }
 
         // Render
         const app = document.getElementById('app');
-        app.innerHTML = '';
+        const sel = document.getElementById('lang');
+        app.innerHTML = app.innerHTML.substring(0, app.innerHTML.indexOf('<p id="status"')) + '<p id="status"></p>';
+        if (sel && lang) sel.value = lang;
 
         const title = document.createElement('h2');
         title.textContent = data.title || '제목 없음';
@@ -84,12 +114,13 @@
         }
 
         document.getElementById('raw').textContent = JSON.stringify(data, null, 2);
+        status.textContent = '';
       }
-
-      load().catch(err => {
-        document.getElementById('app').textContent = '로드 실패: ' + err.message;
+      const sel = document.getElementById('lang');
+      sel.addEventListener('change', () => chooseAndLoad(sel.value).catch(err => { document.getElementById('status').textContent = '로드 실패: ' + err.message; }));
+      chooseAndLoad('ko').catch(err => {
+        document.getElementById('status').textContent = '로드 실패: ' + err.message;
       });
     </script>
   </body>
   </html>
-

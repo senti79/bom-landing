@@ -1,0 +1,23 @@
+{
+  "version": "2025-09-25",
+  "title": "BOMS Landing",
+  "description": "Landing content served via GitHub Pages (EN)",
+  "sections": [
+    {
+      "type": "hero",
+      "headline": "Hello from BOMS",
+      "sub": "We share the latest news and features",
+      "image": "/assets/hero.jpg",
+      "cta": { "label": "Learn more", "href": "#" }
+    },
+    {
+      "type": "feature",
+      "items": [
+        { "icon": "⚡", "title": "Fast updates", "desc": "Deploy quickly after JSON changes" },
+        { "icon": "🔒", "title": "Safe ops", "desc": "Prevent errors with PR review" },
+        { "icon": "🧩", "title": "Flexible", "desc": "Loose schema, easy to extend" }
+      ]
+    }
+  ]
+}
+

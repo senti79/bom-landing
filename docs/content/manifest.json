@@ -1,0 +1,8 @@
+{
+  "defaultLang": "ko",
+  "languages": {
+    "ko": "landing.ko.json",
+    "en": "landing.en.json"
+  }
+}
+
