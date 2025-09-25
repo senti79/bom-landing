@@ -72,49 +72,93 @@
         const sel = document.getElementById('lang');
         app.innerHTML = app.innerHTML.substring(0, app.innerHTML.indexOf('<p id="status"')) + '<p id="status"></p>';
         if (sel && lang) sel.value = lang;
+        // Support two formats: field-style(HTML) OR sections-array
+        if (data.heroTitleHtml || data.heroSubtitleHtml || data.demoHtml) {
+          const hero = document.createElement('section');
+          hero.className = 'hero';
+          const h = document.createElement('h2');
+          h.innerHTML = data.heroTitleHtml || '';
+          const p = document.createElement('p');
+          p.className = 'muted';
+          p.innerHTML = data.heroSubtitleHtml || '';
+          hero.appendChild(h);
+          hero.appendChild(p);
+          app.appendChild(hero);
 
-        const title = document.createElement('h2');
-        title.textContent = data.title || '제목 없음';
-        app.appendChild(title);
+          const demo = document.createElement('section');
+          demo.innerHTML = data.demoHtml || '';
+          app.appendChild(demo);
 
-        for (const section of (data.sections || [])) {
-          if (section.type === 'hero') {
-            const hero = document.createElement('section');
-            hero.className = 'hero';
-            const h = document.createElement('h3');
-            h.textContent = section.headline || '헤드라인';
-            const p = document.createElement('p');
-            p.className = 'muted';
-            p.textContent = section.sub || '';
-            hero.appendChild(h);
-            hero.appendChild(p);
-            if (section.cta && section.cta.href && section.cta.label) {
-              const a = document.createElement('a');
-              a.href = section.cta.href; a.textContent = section.cta.label; a.style.display='inline-block'; a.style.marginTop='8px';
-              hero.appendChild(a);
+          const wrap = document.createElement('section');
+          const ft = document.createElement('h3');
+          ft.innerHTML = data.featuresTitleHtml || 'Features';
+          wrap.appendChild(ft);
+          const grid = document.createElement('div');
+          grid.className = 'features';
+          const features = [
+            { t: data.feature1TitleHtml, d: data.feature1DescriptionHtml },
+            { t: data.feature2TitleHtml, d: data.feature2DescriptionHtml },
+            { t: data.feature3TitleHtml, d: data.feature3DescriptionHtml },
+          ];
+          for (const f of features) {
+            if (!f.t && !f.d) continue;
+            const card = document.createElement('div');
+            card.className = 'feature';
+            const tt = document.createElement('div');
+            tt.innerHTML = f.t || '';
+            const dd = document.createElement('div');
+            dd.className = 'muted';
+            dd.innerHTML = f.d || '';
+            card.appendChild(tt);
+            card.appendChild(dd);
+            grid.appendChild(card);
+          }
+          wrap.appendChild(grid);
+          app.appendChild(wrap);
+
+          if (data.finalCtaTitleHtml) {
+            const cta = document.createElement('h3');
+            cta.innerHTML = data.finalCtaTitleHtml;
+            app.appendChild(cta);
+          }
+        } else if (Array.isArray(data.sections)) {
+          const title = document.createElement('h2');
+          title.textContent = data.title || '제목 없음';
+          app.appendChild(title);
+          for (const section of data.sections) {
+            if (section.type === 'hero') {
+              const hero = document.createElement('section');
+              hero.className = 'hero';
+              const h = document.createElement('h3');
+              h.textContent = section.headline || '헤드라인';
+              const p = document.createElement('p');
+              p.className = 'muted';
+              p.textContent = section.sub || '';
+              hero.appendChild(h);
+              hero.appendChild(p);
+              app.appendChild(hero);
+            } else if (section.type === 'feature' && Array.isArray(section.items)) {
+              const wrap = document.createElement('section');
+              const h = document.createElement('h3');
+              h.textContent = 'Features';
+              wrap.appendChild(h);
+              const grid = document.createElement('div');
+              grid.className = 'features';
+              for (const it of section.items) {
+                const card = document.createElement('div');
+                card.className = 'feature';
+                const t = document.createElement('div');
+                t.textContent = (it.icon ? it.icon + ' ' : '') + (it.title || '');
+                const d = document.createElement('div');
+                d.className = 'muted';
+                d.textContent = it.desc || '';
+                card.appendChild(t);
+                card.appendChild(d);
+                grid.appendChild(card);
+              }
+              wrap.appendChild(grid);
+              app.appendChild(wrap);
             }
-            app.appendChild(hero);
-          } else if (section.type === 'feature' && Array.isArray(section.items)) {
-            const wrap = document.createElement('section');
-            const h = document.createElement('h3');
-            h.textContent = 'Features';
-            wrap.appendChild(h);
-            const grid = document.createElement('div');
-            grid.className = 'features';
-            for (const it of section.items) {
-              const card = document.createElement('div');
-              card.className = 'feature';
-              const t = document.createElement('div');
-              t.textContent = (it.icon ? it.icon + ' ' : '') + (it.title || '');
-              const d = document.createElement('div');
-              d.className = 'muted';
-              d.textContent = it.desc || '';
-              card.appendChild(t);
-              card.appendChild(d);
-              grid.appendChild(card);
-            }
-            wrap.appendChild(grid);
-            app.appendChild(wrap);
           }
         }
 

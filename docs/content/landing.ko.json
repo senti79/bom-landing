@@ -1,23 +1,14 @@
 {
-  "version": "2025-09-25",
-  "title": "봄스 랜딩",
-  "description": "GitHub Pages에서 제공되는 랜딩 콘텐츠 (KO)",
-  "sections": [
-    {
-      "type": "hero",
-      "headline": "안녕하세요! 봄스입니다",
-      "sub": "최신 소식과 기능을 전해드려요",
-      "image": "/assets/hero.jpg",
-      "cta": { "label": "자세히 보기", "href": "#" }
-    },
-    {
-      "type": "feature",
-      "items": [
-        { "icon": "⚡", "title": "빠른 반영", "desc": "JSON 변경 후 곧바로 배포" },
-        { "icon": "🔒", "title": "안정 운영", "desc": "PR 리뷰로 오류 예방" },
-        { "icon": "🧩", "title": "유연한 구조", "desc": "스키마는 느슨, 확장 용이" }
-      ]
-    }
-  ]
+  "heroTitleHtml": "텍스트가 <span class=\"text-emerald-500\">예술</span>이 되는 공간",
+  "heroSubtitleHtml": "이미지 없이, 오직 텍스트 만으로. 당신의 기록이 특별해집니다.",
+  "demoHtml": "<p>봄봄 노트에서는 <strong class=\"text-emerald-600\">다양한 텍스트 스타일</strong>을 지원해요.</p>\n<p>평범한 밑줄은 이제 그만! <span data-underline-styled=\"true\" data-underline-style=\"wavy\" data-underline-color=\"#34d399\" data-underline-thickness=\"2px\" style=\"text-decoration: underline wavy 2px #34d39999; text-decoration-skip-ink: none; text-underline-offset: 2px;\">물결 밑줄</span>이나 <span data-underline-styled=\"true\" data-underline-style=\"wavy\" data-underline-color=\"#f472b6\" data-underline-thickness=\"2px\" style=\"text-decoration: underline wavy 2px #f472b699; text-decoration-skip-ink: none; text-underline-offset: 2px;\">다른 색상 물결</span>도 가능하고, <span data-underline-styled=\"true\" data-underline-style=\"dotted\" data-underline-color=\"#a3a3a3\" data-underline-thickness=\"2px\" style=\"text-decoration: underline; text-decoration-style: dotted; text-decoration-thickness: 2px; text-decoration-color: #a3a3a399; text-decoration-skip-ink: none; text-underline-offset: 2px;\">점선 밑줄</span>로 포인트를 줄 수도 있죠.</p>\n<p>중요한 부분은 <span data-soft-highlight=\"true\" style=\"background-repeat:no-repeat;background-size:100% 40%;background-position:0 85%;background-image:linear-gradient(#a7f3d066, #a7f3d066);\">은은한 하이라이트</span>로 강조해 보세요. 눈이 편안하면서도 가독성은 높아져요.</p>\n<p>실수로 쓴 내용은 <span data-strike-styled=\"true\" data-strike-style=\"wavy\" data-strike-color=\"#ef4444\" data-strike-thickness=\"2px\" style=\"text-decoration: line-through wavy 2px #ef444499; text-decoration-skip-ink: none;\">귀여운 물결 취소선</span>으로 지워보는 건 어때요? <s>딱딱한 취소선</s>보다 훨씬 감성적이에요.</p>\n<p>가끔은 텍스트만으로 표현하기 어려운 감정, <span class=\"font-semibold text-purple-600\">카오모지 입력기 (´｡• ᵕ •｡`) ♡</span> 로 간편하게 추가할 수 있답니다.</p>",
+  "featuresTitleHtml": "텍스트 꾸미기, 어디까지 해봤니?",
+  "featuresSubtitleHtml": "봄봄 노트가 제공하는 특별한 기능들을 만나보세요.",
+  "feature1TitleHtml": "다채로운 밑줄 & 취소선",
+  "feature1DescriptionHtml": "물결, 점선 등 다양한 스타일의 밑줄과 취소선으로 텍스트에 생동감을 더해보세요.",
+  "feature2TitleHtml": "감각적인 하이라이트",
+  "feature2DescriptionHtml": "너무 튀지 않으면서도 중요한 내용을 확실히 각인시켜 주는 은은한 하이라이트.",
+  "feature3TitleHtml": "재치있는 카오모지 입력기",
+  "feature3DescriptionHtml": "복잡한 검색 없이, 클릭 한 번으로 수많은 카오모지를 간편하게 입력.",
+  "finalCtaTitleHtml": "이제, 당신의 기록을<br />가장 당신답게."
 }
-
