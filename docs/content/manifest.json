@@ -2,7 +2,11 @@
   "defaultLang": "ko",
   "languages": {
     "ko": "landing.ko.json",
-    "en": "landing.en.json"
+    "en": "landing.en.json",
+    "ja": "landing.ja.json",
+    "es": "landing.es.json",
+    "zh": "landing.zh.json",
+    "de": "landing.de.json",
+    "fr": "landing.fr.json"
   }
 }
-

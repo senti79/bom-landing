@@ -1,0 +1,14 @@
+{
+  "version": "2025-09-25",
+  "title": "BOMS Landing",
+  "description": "Contenido de aterrizaje servido por GitHub Pages (ES)",
+  "sections": [
+    { "type": "hero", "headline": "Hola desde BOMS", "sub": "Compartimos novedades y funciones", "image": "/assets/hero.jpg", "cta": { "label": "Saber más", "href": "#" } },
+    { "type": "feature", "items": [
+      { "icon": "⚡", "title": "Actualizaciones rápidas", "desc": "Despliegue inmediato tras cambios en JSON" },
+      { "icon": "🔒", "title": "Operación segura", "desc": "Evita errores con revisión de PR" },
+      { "icon": "🧩", "title": "Flexible", "desc": "Esquema ligero, fácil de extender" }
+    ]}
+  ]
+}
+

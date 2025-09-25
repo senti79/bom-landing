@@ -1,0 +1,14 @@
+{
+  "version": "2025-09-25",
+  "title": "BOMS 登陆页",
+  "description": "通过 GitHub Pages 提供的登陆内容 (ZH)",
+  "sections": [
+    { "type": "hero", "headline": "来自 BOMS 的问候", "sub": "为你带来最新消息与功能", "image": "/assets/hero.jpg", "cta": { "label": "了解更多", "href": "#" } },
+    { "type": "feature", "items": [
+      { "icon": "⚡", "title": "快速更新", "desc": "修改 JSON 后快速部署" },
+      { "icon": "🔒", "title": "稳定运营", "desc": "通过 PR 审核避免错误" },
+      { "icon": "🧩", "title": "灵活结构", "desc": "松散的 schema，易于扩展" }
+    ]}
+  ]
+}
+
